@@ -12,7 +12,7 @@ import os
 # Model orman_tahsis
 
 # Specify the directory where your CSV file is located
-directory = 'C:\\Users\\Huawei\\.spyder-py3\\model_girdileri'  
+directory = 'model_girdileri'  
 
 # Specify the CSV file name
 filename = 'orman_veri.csv'
@@ -63,8 +63,16 @@ alan = m.addVars(analiz_alani, recete, name="x")
 m.update()
 
 # tahsis kısıtı
+# =============================================================================
+# a = m.addConstrs(
+#     (alan.sum('*', j) == s[i] for i in analiz_alani for j in recete), "tahsis_kısıtı")
+# =============================================================================
+
+# Erdi duzeltme
 a = m.addConstrs(
-    (alan.sum('*', j) == s[i] for i in analiz_alani for j in recete), "tahsis_kısıtı")
+    (alan.sum(i, '*') == s[i] for i in analiz_alani), "tahsis_kısıtı")
+
+
 
 #kereste_kısıt = gp.LinExpr()
 #otlatma_kısıt = gp.LinExpr()
@@ -81,6 +89,7 @@ a = m.addConstrs(
     #((gp.quicksum(kereste[i,j]* alan[i,j] for i in analiz_alani_set for j in recete_set) >= 40000) for i in analiz_alani_set for j in recete_set ),name="t")
 b = m.addConstr(
     (alan.prod(t) >= 40000), "kereste_kısıtı")
+
 
 # otlatma kısıtı
 #m.addConstrs(
