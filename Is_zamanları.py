@@ -10,7 +10,7 @@ from gurobipy import GRB
 import pandas as pd
 import os
 
-# Model orman_tahsis
+# Model is_zamanları
 
 #directory = 'model_girdileri'    HOCAM YİNE OLMADI BU MAALESEF
 directory = 'C:\\Users\\Huawei\\.spyder-py3\\model_girdileri'  
